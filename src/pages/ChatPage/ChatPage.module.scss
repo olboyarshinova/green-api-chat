@@ -1,0 +1,18 @@
+.page {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 360px;
+}
+
+.chat {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.messages {
+    flex: 1;
+}

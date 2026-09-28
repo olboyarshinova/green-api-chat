@@ -13,6 +13,7 @@ export const CredentialsForm = ({onSubmit}: CredentialsFormProps) => {
     const [idInstance, setIdInstance] = useState('');
     const [apiTokenInstance, setApiTokenInstance] = useState('');
     const [errors, setErrors] = useState<CredentialsErrors>({});
+    const isFormValid = Boolean(idInstance.trim() && apiTokenInstance.trim());
 
     const handleIdInstanceChange = (value: string) => {
         setIdInstance(value);
@@ -106,7 +107,12 @@ export const CredentialsForm = ({onSubmit}: CredentialsFormProps) => {
                 )}
             </label>
 
-            <button type="submit">Connect</button>
+            <button
+                type="submit"
+                disabled={!isFormValid}
+            >
+                Connect
+            </button>
         </form>
     );
 };

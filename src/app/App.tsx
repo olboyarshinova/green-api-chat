@@ -1,12 +1,16 @@
+import {useState} from 'react';
 import type {Credentials} from '@/features/credentials/model/types';
+import {ChatPage} from '@/pages/ChatPage/ChatPage';
 import {LoginPage} from '@/pages/LoginPage/LoginPage';
 
 function App() {
-    const handleConnect = (credentials: Credentials) => {
-        console.log(credentials);
-    };
+    const [credentials, setCredentials] = useState<Credentials | null>(null);
 
-    return <LoginPage onConnect={handleConnect}/>;
+    if (!credentials) {
+        return <LoginPage onConnect={setCredentials}/>;
+    }
+
+    return <ChatPage credentials={credentials}/>;
 }
 
 export default App;
