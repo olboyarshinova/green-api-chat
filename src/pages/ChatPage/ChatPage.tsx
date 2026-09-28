@@ -3,6 +3,7 @@ import type {Chat} from '@/entities/chat/model/types';
 import {CreateChatForm} from '@/features/create-chat/ui/CreateChatForm';
 import {MessageComposer} from '@/features/send-message/ui/MessageComposer';
 import type {Credentials} from '@/features/credentials/model/types';
+import {createChatId} from '@/features/create-chat/lib/chatId.ts';
 import {sendMessage} from '@/shared/api/green-api/sendMessage';
 import styles from './ChatPage.module.scss';
 
@@ -15,7 +16,7 @@ export const ChatPage = ({credentials}: ChatPageProps) => {
 
     const handleCreateChat = (phoneNumber: string) => {
         setChat({
-            chatId: phoneNumber,
+            chatId: createChatId(phoneNumber),
             phoneNumber,
         });
     };
@@ -40,7 +41,7 @@ export const ChatPage = ({credentials}: ChatPageProps) => {
     return (
         <main className={styles.page}>
             <aside className={styles.sidebar}>
-                <h1>Chats</h1>
+                <h1>Чаты</h1>
 
                 <CreateChatForm onSubmit={handleCreateChat}/>
             </aside>
@@ -53,13 +54,13 @@ export const ChatPage = ({credentials}: ChatPageProps) => {
                         </header>
 
                         <div className={styles.messages}>
-                            <p>No messages yet</p>
+                            <p>Сообщений пока нет.</p>
                         </div>
 
                         <MessageComposer onSend={handleSendMessage}/>
                     </>
                 ) : (
-                    <p>Select or create a chat</p>
+                    <p>Выберите или создайте чат</p>
                 )}
             </section>
         </main>

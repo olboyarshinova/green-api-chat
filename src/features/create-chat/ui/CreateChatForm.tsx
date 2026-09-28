@@ -18,7 +18,7 @@ export const CreateChatForm = ({onSubmit}: CreateChatFormProps) => {
         event.preventDefault();
 
         if (!isValidPhone(phoneNumber)) {
-            setError('Enter a valid phone number');
+            setError('Введите корректный номер телефона');
             return;
         }
 
@@ -40,13 +40,13 @@ export const CreateChatForm = ({onSubmit}: CreateChatFormProps) => {
             onSubmit={handleSubmit}
         >
             <label className={styles.field}>
-                <span>Phone number</span>
+                <span>Номер телефона</span>
 
                 <input
                     type="tel"
                     name="phoneNumber"
                     value={phoneNumber}
-                    placeholder="+7 999 123 45 67"
+                    placeholder="+79991234567"
                     autoComplete="tel"
                     aria-invalid={Boolean(error)}
                     onChange={(event) => handleChange(event.target.value)}
@@ -66,7 +66,7 @@ export const CreateChatForm = ({onSubmit}: CreateChatFormProps) => {
                 type="submit"
                 disabled={!isFormValid}
             >
-                Create chat
+                Создать чат
             </button>
         </form>
     );

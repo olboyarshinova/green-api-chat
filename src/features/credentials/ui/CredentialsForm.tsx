@@ -4,12 +4,16 @@ import type {Credentials, CredentialsErrors} from '@/features/credentials/model/
 import styles from './CredentialsForm.module.scss';
 
 interface CredentialsFormProps {
-    onSubmit: (credentials: Credentials) => void;
+    isLoading: boolean;
+    onSubmit: (credentials: Credentials) => void | Promise<void>;
 }
 
 type FormSubmitHandler = NonNullable<ComponentProps<'form'>['onSubmit']>;
 
-export const CredentialsForm = ({onSubmit}: CredentialsFormProps) => {
+export const CredentialsForm = ({
+        isLoading,
+        onSubmit,
+    }: CredentialsFormProps) => {
     const [idInstance, setIdInstance] = useState('');
     const [apiTokenInstance, setApiTokenInstance] = useState('');
     const [errors, setErrors] = useState<CredentialsErrors>({});
@@ -68,7 +72,7 @@ export const CredentialsForm = ({onSubmit}: CredentialsFormProps) => {
                     type="text"
                     name="idInstance"
                     value={idInstance}
-                    placeholder="Enter ID Instance"
+                    placeholder="Введите ID Instance"
                     autoComplete="off"
                     aria-invalid={Boolean(errors.idInstance)}
                     onChange={(event) => handleIdInstanceChange(event.target.value)}
@@ -91,7 +95,7 @@ export const CredentialsForm = ({onSubmit}: CredentialsFormProps) => {
                     type="password"
                     name="apiTokenInstance"
                     value={apiTokenInstance}
-                    placeholder="Enter API Token Instance"
+                    placeholder="Введите API Token Instance"
                     autoComplete="off"
                     aria-invalid={Boolean(errors.apiTokenInstance)}
                     onChange={(event) => handleApiTokenInstanceChange(event.target.value)}
@@ -109,9 +113,9 @@ export const CredentialsForm = ({onSubmit}: CredentialsFormProps) => {
 
             <button
                 type="submit"
-                disabled={!isFormValid}
+                disabled={!isFormValid || isLoading}
             >
-                Connect
+                {isLoading ? 'Подключение...' : 'Подключиться'}
             </button>
         </form>
     );

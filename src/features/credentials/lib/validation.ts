@@ -7,11 +7,13 @@ export const validateCredentials = ({
     const errors: CredentialsErrors = {};
 
     if (!idInstance.trim()) {
-        errors.idInstance = 'ID Instance is required';
+        errors.idInstance = 'Введите ID Instance';
+    } else if (!/^\d+$/.test(idInstance.trim())) {
+        errors.idInstance = 'ID Instance должен содержать только цифры';
     }
 
     if (!apiTokenInstance.trim()) {
-        errors.apiTokenInstance = 'API Token Instance is required';
+        errors.apiTokenInstance = 'Введите API Token Instance';
     }
 
     return errors;

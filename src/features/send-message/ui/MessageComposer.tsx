@@ -33,7 +33,7 @@ export const MessageComposer = ({onSend}: MessageComposerProps) => {
                 type="text"
                 name="message"
                 value={message}
-                placeholder="Message"
+                placeholder="Сообщение"
                 autoComplete="off"
                 onChange={(event) => setMessage(event.target.value)}
             />
@@ -42,7 +42,7 @@ export const MessageComposer = ({onSend}: MessageComposerProps) => {
                 type="submit"
                 disabled={!isFormValid}
             >
-                Send
+                Отправить
             </button>
         </form>
     );

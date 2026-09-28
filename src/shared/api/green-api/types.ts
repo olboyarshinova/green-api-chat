@@ -6,3 +6,7 @@ export interface SendMessageRequest {
 export interface SendMessageResponse {
     idMessage: string;
 }
+
+export interface GetStateInstanceResponse {
+    stateInstance: string;
+}
