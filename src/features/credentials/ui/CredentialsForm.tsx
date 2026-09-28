@@ -1,6 +1,7 @@
 import {useState, type ComponentProps} from 'react';
 import {validateCredentials} from '@/features/credentials/lib/validation';
 import type {Credentials, CredentialsErrors} from '@/features/credentials/model/types';
+import {Button} from "@/shared/ui/Button/Button.tsx";
 import styles from './CredentialsForm.module.scss';
 
 interface CredentialsFormProps {
@@ -17,6 +18,7 @@ export const CredentialsForm = ({
     const [idInstance, setIdInstance] = useState('');
     const [apiTokenInstance, setApiTokenInstance] = useState('');
     const [errors, setErrors] = useState<CredentialsErrors>({});
+
     const isFormValid = Boolean(idInstance.trim() && apiTokenInstance.trim());
 
     const handleIdInstanceChange = (value: string) => {
@@ -111,12 +113,14 @@ export const CredentialsForm = ({
                 )}
             </label>
 
-            <button
+            <Button
                 type="submit"
-                disabled={!isFormValid || isLoading}
+                isLoading={isLoading}
+                loadingText="Подключение..."
+                disabled={!isFormValid}
             >
-                {isLoading ? 'Подключение...' : 'Подключиться'}
-            </button>
+                Подключиться
+            </Button>
         </form>
     );
 };

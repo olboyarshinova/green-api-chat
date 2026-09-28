@@ -1,4 +1,5 @@
 import {useState, type ComponentProps} from 'react';
+import {Button} from '@/shared/ui/Button/Button';
 import styles from './MessageComposer.module.scss';
 
 interface MessageComposerProps {
@@ -9,9 +10,10 @@ type FormSubmitHandler = NonNullable<ComponentProps<'form'>['onSubmit']>;
 
 export const MessageComposer = ({onSend}: MessageComposerProps) => {
     const [message, setMessage] = useState('');
+
     const isFormValid = Boolean(message.trim());
 
-    const handleSubmit: FormSubmitHandler = async (event) => {
+    const handleSubmit: FormSubmitHandler = (event) => {
         event.preventDefault();
 
         const normalizedMessage = message.trim();
@@ -20,8 +22,8 @@ export const MessageComposer = ({onSend}: MessageComposerProps) => {
             return;
         }
 
-        await onSend(normalizedMessage);
         setMessage('');
+        void onSend(normalizedMessage);
     };
 
     return (
@@ -29,21 +31,20 @@ export const MessageComposer = ({onSend}: MessageComposerProps) => {
             className={styles.form}
             onSubmit={handleSubmit}
         >
-            <input
-                type="text"
+            <textarea
                 name="message"
                 value={message}
                 placeholder="Сообщение"
-                autoComplete="off"
+                rows={1}
                 onChange={(event) => setMessage(event.target.value)}
             />
 
-            <button
+            <Button
                 type="submit"
                 disabled={!isFormValid}
             >
                 Отправить
-            </button>
+            </Button>
         </form>
     );
 };

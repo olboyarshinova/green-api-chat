@@ -37,7 +37,7 @@ export const LoginPage = ({onConnect}: LoginPageProps) => {
     return (
         <main className={styles.page}>
             <div className={styles.card}>
-                <h1>Подключение к GREEN-API</h1>
+                <h2>Подключение к GREEN-API</h2>
 
                 <p>Введите данные инстанса, чтобы начать работу.</p>
 

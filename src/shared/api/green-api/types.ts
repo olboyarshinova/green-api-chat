@@ -10,3 +10,19 @@ export interface SendMessageResponse {
 export interface GetStateInstanceResponse {
     stateInstance: string;
 }
+
+export interface IncomingTextMessageBody {
+    typeWebhook: 'incomingMessageReceived';
+    idMessage: string;
+    timestamp: number;
+    senderData: {
+        chatId: string;
+    };
+    messageData: {
+        typeMessage: 'textMessage';
+        textMessageData: {
+            textMessage: string;
+        };
+    };
+}
+

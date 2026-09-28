@@ -1,5 +1,6 @@
 import {useState, type ComponentProps} from 'react';
 import {isValidPhone, normalizePhone} from '@/features/create-chat/lib/phone';
+import {Button} from "@/shared/ui/Button/Button.tsx";
 import styles from './CreateChatForm.module.scss';
 
 interface CreateChatFormProps {
@@ -57,17 +58,17 @@ export const CreateChatForm = ({onSubmit}: CreateChatFormProps) => {
                         className={styles.error}
                         role="alert"
                     >
-            {error}
-          </span>
+                        {error}
+                    </span>
                 )}
             </label>
 
-            <button
+            <Button
                 type="submit"
                 disabled={!isFormValid}
             >
                 Создать чат
-            </button>
+            </Button>
         </form>
     );
 };

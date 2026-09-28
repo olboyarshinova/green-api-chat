@@ -1,0 +1,36 @@
+.message {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    max-width: 70%;
+    padding: 8px 12px;
+    border-radius: 12px;
+}
+
+.outgoing {
+    align-self: flex-end;
+    background-color: #dcf8c6;
+}
+
+.incoming {
+    align-self: flex-start;
+    background-color: #fff;
+}
+
+.text {
+    overflow-wrap: anywhere;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    margin-top: 4px;
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+.status {
+    font-size: 12px;
+}
