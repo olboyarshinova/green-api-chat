@@ -1,73 +1,114 @@
-# React + TypeScript + Vite
+# GREEN-API Chat
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-приложение для отправки и получения текстовых сообщений WhatsApp через GREEN-API.
 
-Currently, two official plugins are available:
+## Функциональность
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- подключение к GREEN-API по `idInstance` и `apiTokenInstance`;
+- проверка авторизации инстанса;
+- создание чата по номеру телефона;
+- отправка и получение текстовых сообщений;
+- отображение исходящих и входящих сообщений;
+- отображение состояния отправки сообщения;
+- валидация пользовательского ввода.
 
-## React Compiler
+## Стек
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- TypeScript
+- Vite
+- SCSS Modules
+- GREEN-API
 
-## Expanding the ESLint configuration
+## Запуск проекта
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. Клонировать репозиторий
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+git clone <repository-url>
+cd green-api-chat
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Установить зависимости
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+```bash
+npm install
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+### 3. Запустить приложение
+
+```bash
+npm run dev
+```
+
+После запуска приложение будет доступно по адресу, указанному Vite в терминале.
+
+## Настройка GREEN-API
+
+Для работы приложения необходим авторизованный WhatsApp-инстанс GREEN-API.
+
+1. Создайте инстанс в [личном кабинете GREEN-API](https://console.green-api.com/instanceList).
+2. Авторизуйте WhatsApp-аккаунт в созданном инстансе.
+3. Получите `idInstance` и `apiTokenInstance`.
+4. Введите эти данные на странице подключения приложения.
+
+Для получения входящих сообщений в настройках инстанса необходимо включить:
+
+```text
+Receive webhooks on incoming messages and files → Yes
+```
+
+`Webhook URL` необходимо оставить пустым для получения уведомлений через HTTP API.
+
+## Использование
+
+1. Введите `idInstance` и `apiTokenInstance`.
+2. Нажмите «Подключиться».
+3. Введите номер получателя в международном формате без `+`.
+4. Создайте чат.
+5. Отправляйте и получайте текстовые сообщения.
+
+## Архитектура
+
+Проект организован с использованием упрощённого Feature-Sliced Design:
+
+```text
+src/
+├── app/
+├── pages/
+├── features/
+├── entities/
+└── shared/
+```
+
+Такое разделение позволяет отделить бизнес-функциональность, сущности приложения и переиспользуемую инфраструктуру без избыточного усложнения небольшого проекта.
+
+## Работа с GREEN-API
+
+Для отправки сообщений используется `SendMessage`.
+
+Получение входящих сообщений реализовано через HTTP API:
+
+```text
+ReceiveNotification
+        ↓
+обработка уведомления
+        ↓
+DeleteNotification
+```
+
+Приложение обрабатывает только текстовые сообщения в соответствии с требованиями тестового задания.
+
+## Безопасность
+
+`idInstance` и `apiTokenInstance` не сохраняются в `localStorage`, `sessionStorage` или URL и существуют только в состоянии приложения во время текущей сессии.
+
+## Скрипты
+
+```bash
+npm run dev
+npm run build
+npm run lint
+npm run format
+npm run format:check
 ```
