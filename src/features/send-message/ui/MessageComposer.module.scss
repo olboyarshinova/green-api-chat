@@ -1,5 +1,6 @@
 .form {
     display: flex;
+    align-items: flex-end;
     gap: 8px;
     padding: 12px 16px;
     border-top: 1px solid #e5e7eb;
@@ -12,13 +13,21 @@
         padding: 10px 14px;
         border: 1px solid #d1d5db;
         border-radius: 20px;
+        background-color: #fff;
+        color: #111827;
         font: inherit;
         line-height: 20px;
         resize: none;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+        &::placeholder {
+            color: #9ca3af;
+        }
 
         &:focus {
             border-color: #16a34a;
-            outline: none;
+            box-shadow: 0 0 0 3px rgb(22 163 74 / 10%);
         }
     }
 }

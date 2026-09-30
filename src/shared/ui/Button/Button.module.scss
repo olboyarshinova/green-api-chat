@@ -1,4 +1,5 @@
 .button {
+    min-height: 42px;
     padding: 10px 16px;
     border: none;
     border-radius: 8px;
@@ -11,6 +12,10 @@
 
     &:hover:not(:disabled) {
         background-color: #15803d;
+    }
+
+    &:active:not(:disabled) {
+        background-color: #166534;
     }
 
     &:focus-visible {

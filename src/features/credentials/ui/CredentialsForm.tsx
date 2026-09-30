@@ -1,7 +1,7 @@
 import {useState, type ComponentProps} from 'react';
 import {validateCredentials} from '@/features/credentials/lib/validation';
 import type {Credentials, CredentialsErrors} from '@/features/credentials/model/types';
-import {Button} from '@/shared/ui/Button/Button.tsx';
+import {Button} from '@/shared/ui/Button/Button';
 import styles from './CredentialsForm.module.scss';
 
 interface CredentialsFormProps {
