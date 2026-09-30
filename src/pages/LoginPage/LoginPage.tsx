@@ -19,10 +19,8 @@ export const LoginPage = ({onConnect}: LoginPageProps) => {
         try {
             const {stateInstance} = await getStateInstance(credentials);
 
-            console.log('stateInstance:', stateInstance);
-
             if (stateInstance !== 'authorized') {
-                setError('Инстанс не авторизован в Telegram');
+                setError('Инстанс не авторизован');
                 return;
             }
 

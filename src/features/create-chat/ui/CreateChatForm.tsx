@@ -47,7 +47,7 @@ export const CreateChatForm = ({onSubmit}: CreateChatFormProps) => {
                     type="tel"
                     name="phoneNumber"
                     value={phoneNumber}
-                    placeholder="+79991234567"
+                    placeholder="79991234567"
                     autoComplete="tel"
                     aria-invalid={Boolean(error)}
                     onChange={(event) => handleChange(event.target.value)}

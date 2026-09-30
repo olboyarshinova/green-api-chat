@@ -44,4 +44,46 @@ describe('MessageComposer', () => {
 
         expect(button).toBeDisabled();
     });
+
+    it('sends message on Enter', async () => {
+        const user = userEvent.setup();
+        const onSend = vi.fn();
+
+        render(<MessageComposer onSend={onSend} />);
+
+        const input = screen.getByRole('textbox');
+
+        await user.type(input, 'Привет!{Enter}');
+
+        expect(onSend).toHaveBeenCalledOnce();
+        expect(onSend).toHaveBeenCalledWith('Привет!');
+    });
+
+    it('sends message on Enter', async () => {
+        const user = userEvent.setup();
+        const onSend = vi.fn();
+
+        render(<MessageComposer onSend={onSend} />);
+
+        const input = screen.getByRole('textbox');
+
+        await user.type(input, 'Привет!{Enter}');
+
+        expect(onSend).toHaveBeenCalledOnce();
+        expect(onSend).toHaveBeenCalledWith('Привет!');
+    });
+
+    it('adds a new line on Shift+Enter', async () => {
+        const user = userEvent.setup();
+        const onSend = vi.fn();
+
+        render(<MessageComposer onSend={onSend} />);
+
+        const input = screen.getByRole('textbox');
+
+        await user.type(input, 'Первая строка{Shift>}{Enter}{/Shift}Вторая строка');
+
+        expect(onSend).not.toHaveBeenCalled();
+        expect(input).toHaveValue('Первая строка\nВторая строка');
+    });
 });

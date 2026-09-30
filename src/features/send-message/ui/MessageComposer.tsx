@@ -1,4 +1,4 @@
-import {useState, type ComponentProps} from 'react';
+import {useState, type ComponentProps, type KeyboardEvent} from 'react';
 import {Button} from '@/shared/ui/Button/Button';
 import styles from './MessageComposer.module.scss';
 
@@ -13,9 +13,7 @@ export const MessageComposer = ({onSend}: MessageComposerProps) => {
 
     const isFormValid = Boolean(message.trim());
 
-    const handleSubmit: FormSubmitHandler = (event) => {
-        event.preventDefault();
-
+    const sendCurrentMessage = () => {
         const normalizedMessage = message.trim();
 
         if (!normalizedMessage) {
@@ -24,6 +22,18 @@ export const MessageComposer = ({onSend}: MessageComposerProps) => {
 
         setMessage('');
         void onSend(normalizedMessage);
+    };
+
+    const handleSubmit: FormSubmitHandler = (event) => {
+        event.preventDefault();
+        sendCurrentMessage();
+    };
+
+    const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            sendCurrentMessage();
+        }
     };
 
     return (
@@ -37,6 +47,7 @@ export const MessageComposer = ({onSend}: MessageComposerProps) => {
                 placeholder="Сообщение"
                 rows={1}
                 onChange={(event) => setMessage(event.target.value)}
+                onKeyDown={handleKeyDown}
             />
 
             <Button
