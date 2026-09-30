@@ -1,9 +1,7 @@
 import type {Message} from '@/entities/message/model/types';
 import type {IncomingTextMessageBody} from '@/shared/api/green-api/types';
 
-export const mapIncomingMessage = (
-    body: IncomingTextMessageBody,
-): Message => {
+export const mapIncomingMessage = (body: IncomingTextMessageBody): Message => {
     return {
         id: body.idMessage,
         chatId: body.senderData.chatId,

@@ -23,4 +23,3 @@ export const receiveNotification = async (
 
     return JSON.parse(text) as Notification;
 };
-

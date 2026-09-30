@@ -26,7 +26,7 @@ export const MessageBubble = ({message}: MessageBubbleProps) => {
                     <span className={styles.status}>
                         {message.status === 'sending' && '◷'}
                         {message.status === 'failed' && 'Ошибка'}
-          </span>
+                    </span>
                 )}
             </div>
         </div>

@@ -19,7 +19,17 @@ export const ChatPage = ({credentials}: ChatPageProps) => {
     const [messages, setMessages] = useState<Message[]>([]);
 
     const handleIncomingMessage = useCallback((message: Message) => {
-        setMessages((currentMessages) => [...currentMessages, message]);
+        setMessages((currentMessages) => {
+            const messageExists = currentMessages.some(
+                (currentMessage) => currentMessage.id === message.id,
+            );
+
+            if (messageExists) {
+                return currentMessages;
+            }
+
+            return [...currentMessages, message];
+        });
     }, []);
 
     useMessagePolling({

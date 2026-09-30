@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
-import type {Message} from '@/entities/message/model/types';
 import {mapIncomingMessage} from '@/entities/message/lib/mapIncomingMessage';
+import type {Message} from '@/entities/message/model/types';
 import type {Credentials} from '@/features/credentials/model/types';
 import {deleteNotification} from '@/shared/api/green-api/deleteNotification';
 import {isIncomingTextMessage} from '@/shared/api/green-api/isIncomingTextMessage';
@@ -12,12 +12,12 @@ interface UseMessagePollingParams {
     onMessage: (message: Message) => void;
 }
 
-export const useMessagePolling = ({
-        credentials,
-        chatId,
-        onMessage,
-    }: UseMessagePollingParams) => {
+export const useMessagePolling = ({credentials, chatId, onMessage}: UseMessagePollingParams) => {
     useEffect(() => {
+        if (!chatId) {
+            return;
+        }
+
         let isActive = true;
 
         const poll = async () => {

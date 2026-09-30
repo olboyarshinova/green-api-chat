@@ -1,9 +1,9 @@
 import type {Credentials, CredentialsErrors} from '@/features/credentials/model/types';
 
 export const validateCredentials = ({
-        idInstance,
-        apiTokenInstance,
-    }: Credentials): CredentialsErrors => {
+    idInstance,
+    apiTokenInstance,
+}: Credentials): CredentialsErrors => {
     const errors: CredentialsErrors = {};
 
     if (!idInstance.trim()) {

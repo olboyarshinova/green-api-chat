@@ -1,8 +1,6 @@
 import type {IncomingTextMessageBody} from '@/shared/api/green-api/types';
 
-export const isIncomingTextMessage = (
-    body: unknown,
-): body is IncomingTextMessageBody => {
+export const isIncomingTextMessage = (body: unknown): body is IncomingTextMessageBody => {
     if (!body || typeof body !== 'object') {
         return false;
     }
@@ -18,4 +16,3 @@ export const isIncomingTextMessage = (
         typeof message.messageData.textMessageData?.textMessage === 'string'
     );
 };
-

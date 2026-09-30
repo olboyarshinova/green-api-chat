@@ -18,5 +18,5 @@ export const sendMessage = async (
         throw new Error('Failed to send message');
     }
 
-    return await response.json() as Promise<SendMessageResponse>;
+    return (await response.json()) as Promise<SendMessageResponse>;
 };

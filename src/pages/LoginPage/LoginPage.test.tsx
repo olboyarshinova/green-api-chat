@@ -34,4 +34,40 @@ describe('LoginPage', () => {
             apiTokenInstance: 'test-token',
         });
     });
+
+    it('shows error when instance is not authorized', async () => {
+        const user = userEvent.setup();
+        const onConnect = vi.fn();
+
+        vi.mocked(getStateInstance).mockResolvedValue({
+            stateInstance: 'notAuthorized',
+        });
+
+        render(<LoginPage onConnect={onConnect} />);
+
+        await user.type(screen.getByPlaceholderText('Введите ID Instance'), '1234567890');
+        await user.type(screen.getByPlaceholderText('Введите API Token Instance'), 'test-token');
+        await user.click(screen.getByRole('button', {name: 'Подключиться'}));
+
+        expect(await screen.findByRole('alert')).toHaveTextContent('Инстанс не авторизован');
+        expect(onConnect).not.toHaveBeenCalled();
+    });
+
+    it('shows error when connection fails', async () => {
+        const user = userEvent.setup();
+        const onConnect = vi.fn();
+
+        vi.mocked(getStateInstance).mockRejectedValue(new Error('Request failed'));
+
+        render(<LoginPage onConnect={onConnect} />);
+
+        await user.type(screen.getByPlaceholderText('Введите ID Instance'), '1234567890');
+        await user.type(screen.getByPlaceholderText('Введите API Token Instance'), 'test-token');
+        await user.click(screen.getByRole('button', {name: 'Подключиться'}));
+
+        expect(await screen.findByRole('alert')).toHaveTextContent(
+            'Не удалось подключиться. Проверьте данные и попробуйте снова.',
+        );
+        expect(onConnect).not.toHaveBeenCalled();
+    });
 });

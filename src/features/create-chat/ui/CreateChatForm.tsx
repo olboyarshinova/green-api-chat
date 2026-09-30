@@ -1,6 +1,6 @@
 import {useState, type ComponentProps} from 'react';
 import {isValidPhone, normalizePhone} from '@/features/create-chat/lib/phone';
-import {Button} from "@/shared/ui/Button/Button.tsx";
+import {Button} from '@/shared/ui/Button/Button.tsx';
 import styles from './CreateChatForm.module.scss';
 
 interface CreateChatFormProps {

@@ -1,7 +1,7 @@
 import {useState, type ComponentProps} from 'react';
 import {validateCredentials} from '@/features/credentials/lib/validation';
 import type {Credentials, CredentialsErrors} from '@/features/credentials/model/types';
-import {Button} from "@/shared/ui/Button/Button.tsx";
+import {Button} from '@/shared/ui/Button/Button.tsx';
 import styles from './CredentialsForm.module.scss';
 
 interface CredentialsFormProps {
@@ -11,10 +11,7 @@ interface CredentialsFormProps {
 
 type FormSubmitHandler = NonNullable<ComponentProps<'form'>['onSubmit']>;
 
-export const CredentialsForm = ({
-        isLoading,
-        onSubmit,
-    }: CredentialsFormProps) => {
+export const CredentialsForm = ({isLoading, onSubmit}: CredentialsFormProps) => {
     const [idInstance, setIdInstance] = useState('');
     const [apiTokenInstance, setApiTokenInstance] = useState('');
     const [errors, setErrors] = useState<CredentialsErrors>({});
@@ -124,4 +121,3 @@ export const CredentialsForm = ({
         </form>
     );
 };
-

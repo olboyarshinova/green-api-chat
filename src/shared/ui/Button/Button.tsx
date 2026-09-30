@@ -7,12 +7,12 @@ interface ButtonProps extends ComponentProps<'button'> {
 }
 
 export const Button = ({
-        children,
-        isLoading = false,
-        loadingText = 'Загрузка...',
-        disabled,
-        ...props
-    }: ButtonProps) => {
+    children,
+    isLoading = false,
+    loadingText = 'Загрузка...',
+    disabled,
+    ...props
+}: ButtonProps) => {
     return (
         <button
             {...props}
