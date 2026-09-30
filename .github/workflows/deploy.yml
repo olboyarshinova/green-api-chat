@@ -27,18 +27,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.19.5
-          cache: npm
 
       - name: Install dependencies
         run: npm ci --include=dev
-
-      - name: Check dependencies
-        run: |
-          node --version
-          npm --version
-          npm ls vite @types/node
-          ls -la node_modules/vite || true
-          ls -la node_modules/@types/node || true
 
       - name: Build
         run: npm run build
